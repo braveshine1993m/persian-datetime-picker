@@ -4,6 +4,8 @@
 
 import 'dart:math' as math;
 
+import 'package:persian_datetime_picker/src/responsive_helper.dart';
+
 import './pdate_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -355,16 +357,14 @@ class _DatePickerModeToggleButtonState
                 child: InkWell(
                   onTap: widget.onTitlePressed,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 0),
                     child: Row(
                       children: <Widget>[
                         Flexible(
                           child: Text(
                             widget.title,
                             overflow: TextOverflow.ellipsis,
-                            style: textTheme.subtitle2?.copyWith(
-                              color: controlColor,
-                            ),
+                            style: TextStyle(color: controlColor, fontSize: getDefaultTextSize(context)),
                           ),
                         ),
                         RotationTransition(
@@ -383,7 +383,7 @@ class _DatePickerModeToggleButtonState
           ),
           if (widget.mode == PDatePickerMode.day)
             // Give space for the prev/next month buttons that are underneath this row
-            const SizedBox(width: _monthNavButtonsWidth),
+            const SizedBox(width: _monthNavButtonsWidth+50),
         ],
       ),
     );
@@ -561,19 +561,29 @@ class _MonthPickerState extends State<_MonthPicker> {
             child: Row(
               children: <Widget>[
                 const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.chevron_left),
-                  color: controlColor,
-                  tooltip: _isDisplayingFirstMonth ? null : previousTooltipText,
-                  onPressed:
-                      _isDisplayingFirstMonth ? null : _handlePreviousMonth,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.chevron_right),
-                  color: controlColor,
-                  tooltip: _isDisplayingLastMonth ? null : nextTooltipText,
-                  onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
-                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.primary),
+                    onPressed: _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                    child: Row(
+                      children: [
+                        Text("ماه قبل", style: TextStyle(color: Colors.white, fontSize: getDefaultTextSize(context)),),
+                        Icon(
+                          Icons.chevron_left,
+                          color: controlColor,
+                        )],
+                    )),
+                SizedBox(width: 3,),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.primary),
+                    onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
+                    child: Row(
+                      children: [
+                        Text("ماه بعد", style: TextStyle(color: Colors.white, fontSize: getDefaultTextSize(context)),),
+                        Icon(
+                          Icons.chevron_right,
+                          color: controlColor,
+                        )],
+                    )),
               ],
             ),
           ),
