@@ -192,7 +192,11 @@ String formatYear(Jalali date) {
 }
 
 String formatMonthYear(Jalali date) {
-  return ' ( ${date.formatter.mN} ) ${date.formatter.mm} / ${date.formatter.y}';
+  return ' ${date.formatter.mm} ( ${date.formatter.mN} ) \n ${date.formatter.y} ( انتخاب سال )';
+}
+
+String formatPickerYear(Jalali date) {
+  return '${date.formatter.y} ( انتخاب سال ) ';
 }
 
 String formatFullDate(Jalali date) {

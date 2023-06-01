@@ -363,7 +363,9 @@ class _DatePickerModeToggleButtonState
                         Flexible(
                           child: Text(
                             widget.title,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
                             style: TextStyle(color: controlColor, fontSize: getDefaultTextSize(context)),
                           ),
                         ),
@@ -561,29 +563,37 @@ class _MonthPickerState extends State<_MonthPicker> {
             child: Row(
               children: <Widget>[
                 const Spacer(),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.primary),
-                    onPressed: _isDisplayingFirstMonth ? null : _handlePreviousMonth,
-                    child: Row(
-                      children: [
-                        Text("ماه قبل", style: TextStyle(color: Colors.white, fontSize: getDefaultTextSize(context)),),
-                        Icon(
-                          Icons.chevron_left,
-                          color: controlColor,
-                        )],
-                    )),
+                SizedBox(
+                  height: 30,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.primary),
+                      onPressed: _isDisplayingFirstMonth ? null : _handlePreviousMonth,
+                      child: Row(
+                        children: [
+                          Text("ماه قبل", style: TextStyle(color: Colors.white, fontSize: getDefaultTextSize(context)),),
+                          Icon(
+                            Icons.chevron_left,
+                            color:  Colors.white,
+                          )],
+                      )),
+                ),
                 SizedBox(width: 3,),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).colorScheme.primary),
-                    onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
-                    child: Row(
-                      children: [
-                        Text("ماه بعد", style: TextStyle(color: Colors.white, fontSize: getDefaultTextSize(context)),),
-                        Icon(
-                          Icons.chevron_right,
-                          color: controlColor,
-                        )],
-                    )),
+                SizedBox(
+                  height: 30,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                      ),
+                      onPressed: _isDisplayingLastMonth ? null : _handleNextMonth,
+                      child: Row(
+                        children: [
+                          Text("ماه بعد", style: TextStyle(color: Colors.white, fontSize: getDefaultTextSize(context)),),
+                          Icon(
+                            Icons.chevron_right,
+                            color:  Colors.white,
+                          )],
+                      )),
+                ),
               ],
             ),
           ),
